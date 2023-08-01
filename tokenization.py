@@ -1,3 +1,4 @@
+import difflib
 import openai 
 import tiktoken
 import os 
@@ -52,4 +53,13 @@ if __name__ == "__main__":
         print("-------------------")
         concatenated_text += chunk
 
-    print("Original and concatenated texts are the same:", concatenated_text == file_text)
+    print("Differences between original and concatenated texts:")
+    d = difflib.Differ()
+    diff = d.compare(file_text.splitlines(), concatenated_chunks.splitlines())
+
+    differences = [line for line in diff if line.startswith('- ') or line.startswith('+ ')]
+
+    if differences:
+        print('\n'.join(differences))
+    else:
+        print("No differences found.")
