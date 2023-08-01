@@ -7,6 +7,8 @@ from langchain.document_loaders import TextLoader
 from langchain.indexes import VectorstoreIndexCreator
 from langchain.embeddings import OpenAIEmbeddings
 from langchain.vectorstores import Chroma
+from langchain.chat_models import ChatOpenAI
+from langchain.chains import RetrievalQA
 
 
 class TextSearch:
@@ -46,3 +48,9 @@ if __name__ == "__main__":
     text_search.store_chunks()
     results = text_search.retrieve_n_chunks(query) 
     print(results)
+
+    llm = ChatOpenAI(model_name="gpt-3.5-turbo", temperature=0)
+    qa_chain = RetrievalQA.from_chain_type(llm, retriever=text_search.vectorstore.as_retriever())
+    response = qa_chain({"query": query})
+
+    print(response["result"])
