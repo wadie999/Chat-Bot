@@ -14,11 +14,14 @@ class TextTokenizer:
     
     def find_last_period(self, tokens, chunkSize=500):
         period_token = self.tt_encoding.encode('.')
+        print(f"Period token: {period_token}")
+
         last_period_index = chunkSize - 1 if len(tokens) > chunkSize else len(tokens) - 1
         while last_period_index >= 0:
             if tokens[last_period_index] == period_token[0]:
                 return last_period_index
             last_period_index -= 1
+            print(f"On commence la recherche du dernier point par : {last_period_index}")
         return -1
 
     def create_chunks(self, text, chunkSize):
@@ -35,8 +38,15 @@ class TextTokenizer:
                 chunk_end = i + last_period_index + 1
             else:
                 chunk_end = i + next_chunk_size
-
+            print(f"Chunk end: {chunk_end}")
             chunk = tokens[i:i+chunk_end]
+            chunk_text = self.tt_encoding.decode(chunk)
+
+            print(f"Chunk text: {chunk_text}") 
+            print(f"tokens: {len(chunk)}") 
+            print("\n" + "="*50 + "\n")
+
+
             chunks.append(chunk)
             i = chunk_end
         return chunks
@@ -47,10 +57,5 @@ if __name__ == "__main__":
     file_text = text_tokenizer.read_file('minidata.txt')
     chunks = text_tokenizer.create_chunks(file_text, 500)
 
-    for chunk in chunks : 
-        chunk_text = text_tokenizer.tt_encoding.decode(chunk)
-        print(chunk_text)
-        print("\n" + "="*50 + "\n")
-    
     
 
