@@ -21,33 +21,32 @@ class TextTokenizer:
             last_period_index -= 1
         return -1
 
-    def creat_chunks(self, text, chunkSize):
+    def create_chunks(self, text, chunkSize):
         tokens = self.tt_encoding.encode(text)
         total_tokens = len(tokens)
 
         chunks = []
-        for i in range(0,total_tokens,chunkSize):
-            chunk = tokens[i:i+chunkSize]
+        i = 0           #On decoupe le texte depuis le debut
+        while i < total_tokens:
+            next_chunk_size = min(chunkSize, total_tokens - i)
+            last_period_index = self.find_last_period(tokens[i:i + next_chunk_size])
+            chunk_end = i + last_period_index + 1
+
+            chunk = tokens[i:i+chunk_end]
             chunks.append(chunk)
+            i = chunk_end
         return chunks
 
 
 if __name__ == "__main__":
     text_tokenizer = TextTokenizer(encoding='cl100k_base')
     file_text = text_tokenizer.read_file('minidata.txt')
+    chunks = text_tokenizer.create_chunks(file_text, 500)
+
+    for chunk in chunks : 
+        chunk_text = text_tokenizer.tt_encoding.decode(chunk)
+        print(chunk_text)
+
     
     
-    tokens = text_tokenizer.tt_encoding.encode(file_text)
-    
-    index = text_tokenizer.find_last_period(tokens[:500])
-    print(f"le dernier point est a {index}")
 
-    tokens_as_text = text_tokenizer.tt_encoding.decode(tokens[:500])
-
-    print("les 500 premier tokens") 
-    print(tokens_as_text)
-
-
-    tokens_as_text_lastperiod = text_tokenizer.tt_encoding.decode(tokens[:index+1])
-    print("tokens finissent par un point")
-    print(tokens_as_text_lastperiod)
