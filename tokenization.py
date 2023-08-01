@@ -30,7 +30,11 @@ class TextTokenizer:
         while i < total_tokens:
             next_chunk_size = min(chunkSize, total_tokens - i)
             last_period_index = self.find_last_period(tokens[i:i + next_chunk_size])
-            chunk_end = i + last_period_index + 1
+
+            if last_period_index != -1:
+                chunk_end = i + last_period_index + 1
+            else:
+                chunk_end = i + next_chunk_size
 
             chunk = tokens[i:i+chunk_end]
             chunks.append(chunk)
@@ -46,7 +50,7 @@ if __name__ == "__main__":
     for chunk in chunks : 
         chunk_text = text_tokenizer.tt_encoding.decode(chunk)
         print(chunk_text)
-
+        print("\n" + "="*50 + "\n")
     
     
 
