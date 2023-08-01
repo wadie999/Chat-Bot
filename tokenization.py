@@ -12,24 +12,44 @@ class TextTokenizer:
             file_text = f.read()
         return file_text
     
-    def find_last_period(self, tokens, chunkSize=500):
-        period_token = self.tt_encoding.encode('.')
-
-        last_period_index = chunkSize - 1 if len(tokens) > chunkSize else len(tokens) - 1
-        while last_period_index >= 0:
-            if tokens[last_period_index] == '.':
-                return last_period_index
-            last_period_index -= 1
-        return -1
-
+    def count_tokens(self, text):
+        tokens = self.tt_encoding.encode(text)
+        return len(tokens)
     
+    def creat_chunks(self, text, max_tokens):
+        chunks = []
+        current_chunk = ""
+        current_chunk_tokens = 0
+        
+        sentences = text.split(".")
+        for sentence in sentences:
+            sentence_tokens = self.count_tokens(sentence)
+            
+            if current_chunk_tokens + sentence_tokens <= max_tokens:
+                current_chunk += sentence + "."
+                current_chunk_tokens += sentence_tokens
+            else:
+                chunks.append((current_chunk, current_chunk_tokens))
+                current_chunk = sentence + "."
+                current_chunk_tokens = sentence_tokens
+        
+        if current_chunk:
+            chunks.append((current_chunk, current_chunk_tokens))
+        
+        return chunks
 
 if __name__ == "__main__":
     text_tokenizer = TextTokenizer(encoding='cl100k_base')
     file_text = text_tokenizer.read_file('minidata.txt')
-    chunks = text_tokenizer.create_chunks(file_text, 500)
-    for chunk in chunks:
-        print(chunk)
-        print("\n" + "="*50 + "\n")
     
+    max_tokens_per_chunk = 500
+    chunks = text_tokenizer.creat_chunks(file_text, max_tokens_per_chunk)
 
+    concatenated_text = ""
+    for idx, (chunk, token_count) in enumerate(chunks):
+        print(f"Chunk {idx + 1} ({token_count} tokens):")
+        print(chunk)
+        print("-------------------")
+        concatenated_text += chunk
+
+    print("Original and concatenated texts are the same:", concatenated_text == file_text)
