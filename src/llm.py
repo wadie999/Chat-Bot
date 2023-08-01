@@ -1,7 +1,7 @@
 import os
 import sys
 import keys 
-import tokenization
+import tokenization 
 
 from langchain.document_loaders import TextLoader
 from langchain.indexes import VectorstoreIndexCreator
@@ -41,7 +41,7 @@ class TextSearch:
     
     
 def run_query(query):
-    text_search = TextSearch('1_transcript.txt')
+    text_search = TextSearch('data/1_transcript.txt')
     text_search.load_document()
     text_search.split_text()
     text_search.store_chunks()

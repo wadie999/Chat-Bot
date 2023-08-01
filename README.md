@@ -21,7 +21,7 @@ Prepare the Transcript: Place your transcript file in the project directory and 
 
 Run the Script: You can run the script from the command line with the desired query as an argument:
 
-`python llm.py "Your Query Here"`
+`python src\llm.py "Your Query Here"`
 
 ## Theoretical Background
 
