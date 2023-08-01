@@ -1,4 +1,3 @@
-import difflib
 import openai 
 import tiktoken
 import os 
@@ -26,9 +25,12 @@ class TextTokenizer:
         for sentence in sentences:
             sentence_tokens = self.count_tokens(sentence)
             
+            # Si l'ajout de la phrase donne as exces de tokens ----> on la rajoute  
             if current_chunk_tokens + sentence_tokens <= max_tokens:
                 current_chunk += sentence + "."
                 current_chunk_tokens += sentence_tokens
+
+            # Sinon on cree un noveau chunk avec la phrase en cours
             else:
                 chunks.append((current_chunk, current_chunk_tokens))
                 current_chunk = sentence + "."
@@ -41,7 +43,7 @@ class TextTokenizer:
 
 if __name__ == "__main__":
     text_tokenizer = TextTokenizer(encoding='cl100k_base')
-    file_text = text_tokenizer.read_file('minidata.txt')
+    file_text = text_tokenizer.read_file('1_transcript.txt')
     
     max_tokens_per_chunk = 500
     chunks = text_tokenizer.creat_chunks(file_text, max_tokens_per_chunk)
@@ -53,13 +55,4 @@ if __name__ == "__main__":
         print("-------------------")
         concatenated_text += chunk
 
-    print("Differences between original and concatenated texts:")
-    d = difflib.Differ()
-    diff = d.compare(file_text.splitlines(), concatenated_chunks.splitlines())
-
-    differences = [line for line in diff if line.startswith('- ') or line.startswith('+ ')]
-
-    if differences:
-        print('\n'.join(differences))
-    else:
-        print("No differences found.")
+   
