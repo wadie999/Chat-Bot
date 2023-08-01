@@ -13,9 +13,10 @@ class TextTokenizer:
         return file_text
     
     def find_last_period(self, tokens, chunkSize=500):
+        period_token = self.tt_encoding.encode('.')
         last_period_index = chunkSize - 1 if len(tokens) > chunkSize else len(tokens) - 1
         while last_period_index >= 0:
-            if tokens[last_period_index] == '.':
+            if tokens[last_period_index] == period_token[0]:
                 return last_period_index
             last_period_index -= 1
         return -1
@@ -39,7 +40,7 @@ if __name__ == "__main__":
     tokens = text_tokenizer.tt_encoding.encode(file_text)
     
     index = text_tokenizer.find_last_period(tokens[:500])
-    print("le dernier point est a {index}")
+    print(f"le dernier point est a {index}")
 
     tokens_as_text = text_tokenizer.tt_encoding.decode(tokens[:500])
 
