@@ -19,6 +19,7 @@ class TextSearch:
         self.text = None
         self.chunks = None
         self.index = None
+        self.vectorstore = None
 
     def load_document(self):
         self.text = self.tokenizer.read_file(self.filename)
@@ -33,6 +34,9 @@ class TextSearch:
     def retrieve_n_chunks(self, question, n=3):
         important_chunks = self.vectorstore.similarity_search(question)
         return important_chunks[:n]
+    
+    def get_retriever(self):
+        return self.vectorstore.as_retriever()
     
 
 
@@ -50,7 +54,8 @@ if __name__ == "__main__":
     print(results)
 
     llm = ChatOpenAI(model_name="gpt-3.5-turbo", temperature=0)
-    qa_chain = RetrievalQA.from_chain_type(llm, retriever=text_search.vectorstore.as_retriever())
+    retriever = text_search.get_retriever()
+    qa_chain = RetrievalQA.from_chain_type(llm, retriever=retriever)
     response = qa_chain({"query": query})
 
     print(response["result"])
