@@ -38,14 +38,9 @@ class TextSearch:
     def get_retriever(self):
         return self.vectorstore.as_retriever()
     
-
-
-if __name__ == "__main__":
-    os.environ["OPENAI_API_KEY"] = keys.key
-
-    query = sys.argv[1]
-    print(query)
-
+    
+    
+def run_query(query):
     text_search = TextSearch('1_transcript.txt')
     text_search.load_document()
     text_search.split_text()
@@ -57,5 +52,12 @@ if __name__ == "__main__":
     retriever = text_search.get_retriever()
     qa_chain = RetrievalQA.from_chain_type(llm, retriever=retriever)
     response = qa_chain({"query": query})
-
+    print("\n ------------ La reponse final : ----------")
     print(response["result"])
+
+if __name__ == "__main__":
+    os.environ["OPENAI_API_KEY"] = keys.key
+
+    query = sys.argv[1]
+    result = run_query(query)
+    print(result)
