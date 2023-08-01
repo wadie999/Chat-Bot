@@ -2,13 +2,16 @@ import openai
 import tiktoken
 import os 
 
+
+## ------------------Chunking the Document --------------###
+
 class TextTokenizer:
     def __init__(self, encoding):
         self.encoding = encoding
         self.tt_encoding = tiktoken.get_encoding(encoding)
     
     def read_file(self,fname):
-        with open(fname, 'r', encoding="utf8") as f:
+        with open(fname, 'r', encoding="utf-8") as f:
             file_text = f.read()
         return file_text
     
@@ -32,27 +35,12 @@ class TextTokenizer:
 
             # Sinon on cree un noveau chunk avec la phrase en cours
             else:
-                chunks.append((current_chunk, current_chunk_tokens))
+                chunks.append(current_chunk)
                 current_chunk = sentence + "."
                 current_chunk_tokens = sentence_tokens
         
         if current_chunk:
-            chunks.append((current_chunk, current_chunk_tokens))
+            chunks.append(current_chunk)
         
         return chunks
 
-if __name__ == "__main__":
-    text_tokenizer = TextTokenizer(encoding='cl100k_base')
-    file_text = text_tokenizer.read_file('1_transcript.txt')
-    
-    max_tokens_per_chunk = 500
-    chunks = text_tokenizer.creat_chunks(file_text, max_tokens_per_chunk)
-
-    concatenated_text = ""
-    for idx, (chunk, token_count) in enumerate(chunks):
-        print(f"Chunk {idx + 1} ({token_count} tokens):")
-        print(chunk)
-        print("-------------------")
-        concatenated_text += chunk
-
-   
