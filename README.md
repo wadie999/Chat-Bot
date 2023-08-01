@@ -53,7 +53,7 @@ We use OpenAI Embeddings to represent text in a numerical form, allowing for sim
 Based on the query, the most relevant chunks are retrieved and processed to form the final response.
 
 
-![Abstraction levels](Images/abstraction_levels.pngpng)
+![Abstraction levels](Images/abstraction_levels.png)
 
 
 For a more detailed explanation, refer to [QA Langchain Documentation](https://python.langchain.com/docs/use_cases/question_answering/).
