@@ -17,7 +17,7 @@ class TextTokenizer:
         while last_period_index >= 0:
             if tokens[last_period_index] == '.':
                 return last_period_index
-        last_period_index -= 1
+            last_period_index -= 1
         return -1
 
     def creat_chunks(self, text, chunkSize):
