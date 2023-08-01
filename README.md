@@ -31,10 +31,10 @@ BUT They only know what they learned during training. So how do we get them to u
 
 The Answer is to Convert all private data into embeddings stored in a vector database.
 
-![Embedding Process](images/embedding.jpg)
+![Embedding Process](Images/embedding.jpg)
 
 
-![Embedding Process](images/qa_chain_pipeline.jpeg)
+![Embedding Process](Images/qa_chain_pipeline.jpeg)
 
 
 ### Text Search and Retrieval
@@ -53,7 +53,7 @@ We use OpenAI Embeddings to represent text in a numerical form, allowing for sim
 Based on the query, the most relevant chunks are retrieved and processed to form the final response.
 
 
-![Abstraction levels](images/abstraction_levels.pngpng)
+![Abstraction levels](Images/abstraction_levels.pngpng)
 
 
-For a more detailed explanation, refer to [this paper](https://python.langchain.com/docs/use_cases/question_answering/).
+For a more detailed explanation, refer to [QA Langchain Documentation](https://python.langchain.com/docs/use_cases/question_answering/).
