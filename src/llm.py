@@ -46,14 +46,15 @@ def run_query(query):
     text_search.split_text()
     text_search.store_chunks()
     results = text_search.retrieve_n_chunks(query) 
-    print(results)
+    # print(results)
 
     llm = ChatOpenAI(model_name="gpt-3.5-turbo", temperature=0)
     retriever = text_search.get_retriever()
     qa_chain = RetrievalQA.from_chain_type(llm, retriever=retriever)
     response = qa_chain({"query": query})
-    print("\n ------------ La reponse final : ----------")
-    print(response["result"])
+    # print("\n ------------ La reponse final : ----------")
+    # print(response["result"])
+    return response
 
 if __name__ == "__main__":
     os.environ["OPENAI_API_KEY"] = keys.key
