@@ -1,7 +1,7 @@
 
 ## Introduction
 
-This project provides a custom text search functionality for large text documents, integrating with the LangChain library. 
+This project provides an API for custom text search functionality for large text documents, integrating with the LangChain library. 
 It aims to provide efficient and relevant text retrieval for specific use cases.
 
 ## Installation and Setup
@@ -22,6 +22,13 @@ Prepare the Transcript: Place your transcript file in the project directory and 
 Run the Script: You can run the script from the command line:
 
 `uvicorn src.main:app --reload`
+
+`uvicorn` is the ASGI server used to run FastAPI applications.
+
+`src.main:app` tells uvicorn where to find the FastAPI application instance (app) within your project (in the main module under the src directory).
+
+`--reload` is an optional argument that enables auto-reloading of the server when code changes are detected. This is particularly useful during development, as it allows for changes to take effect without manually restarting the server.
+vbnet
 
 ## Theoretical Background
 
