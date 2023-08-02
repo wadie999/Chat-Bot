@@ -1,3 +1,16 @@
+form-group {
+    margin-bottom: 15px;
+}
+
+input[type="text"] {
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 100%;
+    display: block;
+    margin-bottom: 10px;
+}
+
+
 body {
     font-family: Arial, sans-serif;
     padding: 20px;
@@ -13,6 +26,19 @@ body {
     min-height: 50px;
 }
 button {
-    padding: 10px 20px;
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
     cursor: pointer;
+}
+
+#responseDiv {
+    border: 1px solid #ccc;
+    padding: 10px;
+    min-height: 50px;
 }

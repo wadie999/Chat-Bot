@@ -8,5 +8,5 @@ function sendQuery() {
 
 function showResponse(response) {
     const responseDiv = document.getElementById('responseDiv');
-    responseDiv.textContent = response.result; // Set the text content to the response string
+    responseDiv.textContent = response.result  ; // Set the text content to the response string
 }
