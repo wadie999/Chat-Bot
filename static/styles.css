@@ -1,0 +1,18 @@
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+#query {
+    width: 80%;
+    padding: 10px;
+    margin: 10px 0;
+}
+#response {
+    border: 1px solid #ccc;
+    padding: 10px;
+    min-height: 50px;
+}
+button {
+    padding: 10px 20px;
+    cursor: pointer;
+}
