@@ -4,12 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Query Interface</title>
+    <link rel="stylesheet" href ="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="/static/script.js"></script>
 </head>
 <body>
-    <h1>Enter Your Query</h1>
-    <input type="text" id="queryInput" placeholder="Type your query here...">
-    <button onclick="sendQuery()">Send Query</button>
-    <div id="responseDiv"></div>
+    <h1 class="mb-4">Enter Your Query</h1>
+    <div class="form-group">
+        <input type="text" class="form-control" id="queryInput" placeholder="Type your query here...">
+    </div>
+    <button onclick="sendQuery()" class="tbn tbn-primary mb-3">Send Query</button>
+    <div id="responseDiv" class="border p-3"></div>
 </body>
 </html>
