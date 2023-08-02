@@ -19,9 +19,9 @@ Set your OpenAI API key: Make sure to set your OpenAI API key in the environment
 
 Prepare the Transcript: Place your transcript file in the project directory and name it 1_transcript.txt.
 
-Run the Script: You can run the script from the command line with the desired query as an argument:
+Run the Script: You can run the script from the command line:
 
-`python src\llm.py "Your Query Here"`
+`uvicorn src.main:app --reload`
 
 ## Theoretical Background
 
