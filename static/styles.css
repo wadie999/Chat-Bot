@@ -35,7 +35,7 @@ input[type="text"] {
     text-align: left;
   }
   
-  
+
 body {
     font-family: Arial, sans-serif;
     padding: 20px;
@@ -74,3 +74,49 @@ button {
     font-size: 18px;
 
 }
+
+.chatContainer {
+    max-height: 60vh;
+    overflow-y: scroll;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px auto;
+    max-width: 80%;
+  }
+  
+  .inputContainer {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .userMessage, .botMessage {
+    padding: 10px;
+    border-radius: 20px;
+    margin: 5px;
+    max-width: 70%;
+    clear: both;
+  }
+  
+  .userMessage {
+    background-color: #f0f0f0;
+    float: right;
+  }
+  
+  .botMessage {
+    background-color: #e6e6e6;
+    float: left;
+  }
+  
+  .typingIndicator {
+    font-size: 20px;
+    float: left;
+    animation: typing 1s infinite;
+  }
+  
+  @keyframes typing {
+    0% { content: '. '; }
+    33% { content: '. . '; }
+    66% { content: '. . .'; }
+    100% { content: ''; }
+  }
+  
