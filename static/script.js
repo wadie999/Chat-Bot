@@ -31,10 +31,10 @@ function showQuery(query) {
 
 function showResponse(response) {
     const responseDiv = document.getElementById('responseDiv');
-    const responseBubble = document.createElement('div');
+    const responseDivMessage = document.createElement('div');
     responseDivMessage.className = 'botMessage';
     responseDivMessage.textContent = response.result;
-    responseDiv.appendChild(responseBubble);
+    responseDiv.appendChild(responseDivMessage);
 
     // Add follow-up message
     const followUpDiv = document.createElement('div');
