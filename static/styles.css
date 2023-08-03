@@ -1,48 +1,66 @@
-form-group {
-    margin-bottom: 15px;
-}
-
-input[type="text"] {
-    border: 1px solid #ccc;
-    padding: 15px;
-    width: 100%;
-    display: block;
-    margin: 10px auto;
-    font-size: 20px;
+body {
+    font-family: Arial, sans-serif;
+    background-color: #000000; 
+    margin: 0;
+    overflow: hidden;
+  }
+  
+  .chatWrapper {
+    max-width: 800px; 
+    height: 100vh;
+    background-color: #242527;
+    display: flex;
+    flex-direction: column;
+    margin: auto; 
+    align-items: center; 
     text-align: center;
-}
-
-.queryBubble, .responseBubble {
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin: 10px;
-    max-width: 80%;
-    font-size: 18px;
-    display: inline-block;
-  }
-  
-  .queryBubble {
-    background-color: #f0f0f0;
-    text-align: left;
-  }
-  
-  .responseBubble {
-    background-color: #e0e0ff;
-    text-align: left;
   }
   
   .chatContainer {
-    text-align: left;
+    flex-grow: 1;
+    overflow-y: scroll;
+    padding: 15px;
+    background-color: #242527;
+    width: 100%;
+    text-align: center;
+  }
+  .chatContainer::-webkit-scrollbar {
+    width: 10px; 
   }
   
-
-body {
-    font-family: Arial, sans-serif;
-    background-color: #271b40;
-    margin: 0;
-}
-
-button {
+  .chatContainer::-webkit-scrollbar-track {
+    background: #3f3f3f; 
+  }
+  
+  .chatContainer::-webkit-scrollbar-thumb {
+    background: #888; 
+    border-radius: 5px; 
+  }
+  
+  .chatContainer::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
+  
+  .inputContainer {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    background-color: #3c3d42;
+    width: 100%;
+  }
+  
+  #queryInput {
+    flex-grow: 1;
+    margin-right: 10px;
+    padding: 10px;
+    border: 1px solid #242527;
+    border-radius: 20px;
+    font-size: 16px;
+    color: #ffffff;
+    background-color: #242527;
+  }
+  
+  button {
     padding: 10px 20px;
     background-color: #4CAF50;
     border: none;
@@ -50,55 +68,9 @@ button {
     cursor: pointer;
     border-radius: 20px;
     font-size: 16px;
-}
-
-.chatWrapper {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    background-color: #271b40;
-}
-
-#queryInput {
-    flex-grow: 1;
-    margin-right: 10px;
-    padding: 10px;
-    border: 1px solid #e0e0e0;
-    border-radius: 20px;
-    font-size: 16px;
-}
-
-
-#responseDiv {
-    max-width: 100%;
-    border: 1px solid #ccc;
-    padding: 10px;
-    min-height: 50px;
-    margin: 10px auto;
-    max-width: 80%;
-    font-size: 18px;
-
-}
-
-.chatContainer {
-    height: 80vh;
-    width: 100vh;
-    overflow-y: scroll;
-    padding: 15px;
-    background-color: #ffffff;
   }
   
-  .inputContainer {
-    display: flex;
-    justify-content: space-between;
-    padding: 15px;
-    background-color: #f8f8f8; 
-  }
-  
-.userMessage,
-.botMessage,
-.typingIndicator {
+  .userMessage, .botMessage {
     padding: 10px;
     border-radius: 20px;
     margin: 5px;
@@ -106,7 +78,8 @@ button {
     font-size: 16px;
     clear: both;
     line-height: 1.5;
-}
+    text-align: center;
+  }
   
   .userMessage {
     background-color: #1c83c3;
@@ -120,24 +93,26 @@ button {
     float: left;
   }
   
-  .typingIndicator {
-    background-color: #28de5b; 
-    padding: 10px;
-    border-radius: 20px;
-    margin: 5px;
-    max-width: 70%;
-    float: left;
-    color: #ffffff; 
-    font-size: 20px;
-    animation: typing 1s steps(5, end) infinite;
+    .typingIndicator {
+      background-color: #28de5b; 
+      padding: 10px;
+      border-radius: 20px;
+      margin: 5px;
+      max-width: 70%;
+      float: left;
+      color: #ffffff; 
+      font-size: 20px;
+      animation: typing 1s steps(5, end) infinite;
+      text-align: center;
+    }
+    
+    @keyframes typing {
+      0% { content: '.'; }
+      20% { content: '..'; }
+      40% { content: '...'; }
+      60% { content: '..'; }
+      80% { content: '.'; }
+      100% { content: ''; }
   }
-  
-  @keyframes typing {
-    0% { content: '.'; }
-    20% { content: '..'; }
-    40% { content: '...'; }
-    60% { content: '..'; }
-    80% { content: '.'; }
-    100% { content: ''; }
-}
+    
   
