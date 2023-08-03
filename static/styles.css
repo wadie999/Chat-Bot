@@ -55,11 +55,18 @@ button {
     margin: 10px auto;
 }
 
+.chatWrapper {
+    display: flex;
+    flex-direction: column;
+    max-width: 80%;
+    margin: auto;
+    height: 100vh;
+}
+
 #queryInput {
     width: 80%;
     padding: 20px;
     min-height: 50px;
-    margin: 10px 0;
     margin: 10px auto;
     max-width: 80%
 }
@@ -76,7 +83,7 @@ button {
 }
 
 .chatContainer {
-    max-height: 60vh;
+    max-height: 100vh;
     overflow-y: scroll;
     border: 1px solid #ccc;
     padding: 10px;
@@ -87,6 +94,9 @@ button {
   .inputContainer {
     display: flex;
     justify-content: center;
+    right: 0;
+    bottom: 0;
+    margin: 10px;
   }
   
   .userMessage, .botMessage {
@@ -110,11 +120,14 @@ button {
   }
   
   .typingIndicator {
-    font-size: 20px;
+    background-color: #28de5b; 
+    padding: 10px;
+    border-radius: 20px;
+    margin: 5px;
+    max-width: 70%;
     float: left;
-    display: inline-block;
-    width: 1em;
-    text-align: center;
+    color: #ffffff; 
+    font-size: 20px;
     animation: typing 1s steps(5, end) infinite;
   }
   
