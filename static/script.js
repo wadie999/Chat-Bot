@@ -14,6 +14,7 @@ function sendQuery() {
     fetch(`http://127.0.0.1:8000/query?query=${query}`)
         .then(response => response.json())
         .then(data => {
+            console.log("Data:", data);
             // Remove typing indicator
             responseDiv.removeChild(typingIndicator);
             showResponse(data.response)}) // Here you pass the response directly, which is a string
