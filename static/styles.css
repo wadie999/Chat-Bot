@@ -56,19 +56,17 @@ button {
 }
 
 .chatWrapper {
-    display: flex;
-    flex-direction: column;
     max-width: 80%;
     margin: auto;
-    height: 100vh;
+    height: 80vh; 
+    border: 1px solid #ccc;
+    display: flex;
+    flex-direction: column; 
 }
 
 #queryInput {
-    width: 80%;
-    padding: 20px;
-    min-height: 50px;
-    margin: 10px auto;
-    max-width: 80%
+    flex-grow: 1; 
+    margin-right: 10px;
 }
 
 
@@ -83,20 +81,17 @@ button {
 }
 
 .chatContainer {
-    max-height: 100vh;
+    flex-grow: 1; 
     overflow-y: scroll;
-    border: 1px solid #ccc;
     padding: 10px;
-    margin: 10px auto;
-    max-width: 80%;
+    max-width: 100%;
   }
   
   .inputContainer {
     display: flex;
-    justify-content: center;
-    right: 0;
-    bottom: 0;
-    margin: 10px;
+    justify-content: space-between; 
+    padding: 10px;
+    background-color: #f0f0f0; 
   }
   
   .userMessage, .botMessage {
