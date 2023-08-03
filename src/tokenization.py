@@ -1,17 +1,18 @@
 import openai 
 import tiktoken
 import os 
+from . import config
 
 
 ## ------------------Chunking the Document --------------###
 
 class TextTokenizer:
-    def __init__(self, encoding):
+    def __init__(self, encoding=config.ENCODING):
         self.encoding = encoding
         self.tt_encoding = tiktoken.get_encoding(encoding)
     
     def read_file(self,fname):
-        with open(fname, 'r', encoding="utf-8") as f:
+        with open(fname, 'r', self.encoding) as f:
             file_text = f.read()
         return file_text
     

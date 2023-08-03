@@ -1,6 +1,7 @@
 from fastapi import FastAPI, Query
 from fastapi.staticfiles import StaticFiles
 from starlette.responses import FileResponse
+from . import config
 from . import llm
 from . import keys
 import os
@@ -19,7 +20,7 @@ async def read_root():
 @app.get("/query")
 async def get_query_response(query: str = Query(..., description="Enter your query here")):
     #### ------Creating a QueryRunner object with the document path and model name --------------####
-    query_runner = llm.QueryRunner(document_path = 'data/1_transcript.txt',model_name="gpt-3.5-turbo")
+    query_runner = llm.QueryRunner(document_path = config.DOCUMENT_PATH ,model_name=config.MODEL_NAME)
 
     #### ------ Running the query and getting the response ------------------####
     response = query_runner.run_query(query)

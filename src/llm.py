@@ -2,6 +2,7 @@ import os
 import sys
 from . import keys
 from . import tokenization 
+from . import config
 
 from langchain.document_loaders import TextLoader
 from langchain.indexes import VectorstoreIndexCreator
@@ -14,7 +15,7 @@ from langchain.chains import RetrievalQA
 class DocumentManager:
     #### --------- Handles loading and chunking of text  ------###
 
-    def __init__(self, filename, encoding='cl100k_base'):
+    def __init__(self, filename, encoding=config.EMBEDDING_TYPE):
         self.filename = filename
         self.tokenizer = tokenization.TextTokenizer(encoding)
         self.text = None
@@ -25,14 +26,15 @@ class DocumentManager:
         #### ------- Loads the document from file -------### 
         self.text = self.tokenizer.read_file(self.filename)
 
-    def split_text(self, max_tokens=500):
+    def split_text(self, max_tokens=config.MAX_TOKENS):
         #### ------- Splits the text into chunks -------### 
         self.chunks = self.tokenizer.creat_chunks(self.text, max_tokens)
 
 
 class ChunkStore:
     def __init__(self, chunks):
-        self.chunks = chunks.vectorestore = None
+        self.chunks = chunks
+        self.vectorestore = None
 
     def store_chunks(self):
         #### ------- stores the text chunks in a vector database -------###
@@ -49,7 +51,7 @@ class ChunkStore:
     
     
 class QueryRunner:
-    def __init__(self, document_path, model_name="gpt-3.5-turbo"):
+    def __init__(self, document_path, model_name=config.MODEL_NAME):
         self.document_path = document_path
         self.model_name = model_name
 
@@ -62,7 +64,7 @@ class QueryRunner:
         chunk_store = ChunkStore(document_manager.chunks)
         chunk_store.store_chunks()
 
-        results = chunk_store.retrieve_top_n_chunks(query)
+        chunk_store.retrieve_top_n_chunks(query)
 
         llm = ChatOpenAI(model_name=self.model_name, temperature=0)
         retriever = chunk_store.vectorstore.as_retriever()
@@ -75,6 +77,6 @@ if __name__ == "__main__":
     os.environ["OPENAI_API_KEY"] = keys.key
 
     query = sys.argv[1]
-    query_runner = QueryRunner('data/1_transcript.txt')
+    query_runner = QueryRunner(config.DOCUMENT_PATH)
     result = query_runner.run_query(query)
     print(result)
