@@ -38,39 +38,40 @@ input[type="text"] {
 
 body {
     font-family: Arial, sans-serif;
-    padding: 20px;
-    text-align: center;
+    background-color: #271b40;
+    margin: 0;
 }
 
 button {
-    background-color: #4CAF50; /* Green */
+    padding: 10px 20px;
+    background-color: #4CAF50;
     border: none;
     color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: block;
-    font-size: 16px;
     cursor: pointer;
-    margin: 10px auto;
+    border-radius: 20px;
+    font-size: 16px;
 }
 
 .chatWrapper {
-    max-width: 80%;
-    margin: auto;
-    height: 80vh; 
-    border: 1px solid #ccc;
+    height: 100%;
     display: flex;
-    flex-direction: column; 
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #271b40;
 }
 
 #queryInput {
-    flex-grow: 1; 
+    flex-grow: 1;
     margin-right: 10px;
+    padding: 10px;
+    border: 1px solid #e0e0e0;
+    border-radius: 20px;
+    font-size: 16px;
 }
 
 
 #responseDiv {
+    max-width: 100%;
     border: 1px solid #ccc;
     padding: 10px;
     min-height: 50px;
@@ -81,26 +82,31 @@ button {
 }
 
 .chatContainer {
-    flex-grow: 1; 
+    height: 80vh;
+    width: 100vh;
     overflow-y: scroll;
-    padding: 10px;
-    max-width: 100%;
+    padding: 15px;
+    background-color: #ffffff;
   }
   
   .inputContainer {
     display: flex;
-    justify-content: space-between; 
-    padding: 10px;
-    background-color: #f0f0f0; 
+    justify-content: space-between;
+    padding: 15px;
+    background-color: #f8f8f8; 
   }
   
-  .userMessage, .botMessage {
+.userMessage,
+.botMessage,
+.typingIndicator {
     padding: 10px;
     border-radius: 20px;
     margin: 5px;
     max-width: 70%;
+    font-size: 16px;
     clear: both;
-  }
+    line-height: 1.5;
+}
   
   .userMessage {
     background-color: #1c83c3;
