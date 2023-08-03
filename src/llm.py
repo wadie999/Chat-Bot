@@ -11,27 +11,36 @@ from langchain.chat_models import ChatOpenAI
 from langchain.chains import RetrievalQA
 
 
-class TextSearch:
+class DocumentManager:
+    #### --------- Handles loading and chunking of text  ------###
+
     def __init__(self, filename, encoding='cl100k_base'):
         self.filename = filename
-        self.encoding = encoding
         self.tokenizer = tokenization.TextTokenizer(encoding)
         self.text = None
         self.chunks = None
-        self.index = None
-        self.vectorstore = None
+    
 
     def load_document(self):
+        #### ------- Loads the document from file -------### 
         self.text = self.tokenizer.read_file(self.filename)
 
     def split_text(self, max_tokens=500):
+        #### ------- Splits the text into chunks -------### 
         self.chunks = self.tokenizer.creat_chunks(self.text, max_tokens)
-        
+
+
+class ChunkStore:
+    def __init__(self, chunks):
+        self.chunks = chunks.vectorestore = None
+
     def store_chunks(self):
+        #### ------- stores the text chunks in a vector database -------###
         texts = [chunk for chunk in self.chunks]
         self.vectorstore = Chroma.from_texts(texts=texts, embedding=OpenAIEmbeddings())
 
-    def retrieve_n_chunks(self, question, n=3):
+    def retrieve_top_n_chunks(self, question, n=3):
+         #### ------- Retrieves the top n relevant chunks for a given question -------###
         important_chunks = self.vectorstore.similarity_search(question)
         return important_chunks[:n]
     
@@ -39,26 +48,33 @@ class TextSearch:
         return self.vectorstore.as_retriever()
     
     
-    
-def run_query(query):
-    text_search = TextSearch('data/1_transcript.txt')
-    text_search.load_document()
-    text_search.split_text()
-    text_search.store_chunks()
-    results = text_search.retrieve_n_chunks(query) 
-    # print(results)
+class QueryRunner:
+    def __init__(self, document_path, model_name="gpt-3.5-turbo"):
+        self.document_path = document_path
+        self.model_name = model_name
 
-    llm = ChatOpenAI(model_name="gpt-3.5-turbo", temperature=0)
-    retriever = text_search.get_retriever()
-    qa_chain = RetrievalQA.from_chain_type(llm, retriever=retriever)
-    response = qa_chain({"query": query})
-    # print("\n ------------ La reponse final : ----------")
-    # print(response["result"])
-    return response
+    def run_query(self, query):
+        document_manager = DocumentManager(self.document_path)
+        document_manager.load_document()
+        document_manager.split_text()
+        
+
+        chunk_store = ChunkStore(document_manager.chunks)
+        chunk_store.store_chunks()
+
+        results = chunk_store.retrieve_top_n_chunks(query)
+
+        llm = ChatOpenAI(model_name=self.model_name, temperature=0)
+        retriever = chunk_store.vectorstore.as_retriever()
+        qa_chain = RetrievalQA.from_chain_type(llm, retriever=retriever)
+        response = qa_chain({"query": query})
+       
+        return response
 
 if __name__ == "__main__":
     os.environ["OPENAI_API_KEY"] = keys.key
 
     query = sys.argv[1]
-    result = run_query(query)
+    query_runner = QueryRunner('data/1_transcript.txt')
+    result = query_runner.run_query(query)
     print(result)
