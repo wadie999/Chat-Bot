@@ -4,19 +4,25 @@ function sendQuery() {
     document.getElementById('queryInput').value = ""; // Clear the input
 
     // Add typing indicator
-    const responseDiv = document.getElementById('responseDiv');
     const typingIndicator = document.createElement('div');
     typingIndicator.className = "typingIndicator";
-    typingIndicator.textContent = '. . .';
+    typingIndicator.textContent = '.';
     responseDiv.appendChild(typingIndicator);
-
-
+    // Add interval to update the text content
+    const typingInterval = setInterval(() => {
+        typingIndicator.textContent += '.';
+        if (typingIndicator.textContent.length > 3) typingIndicator.textContent = '.';
+    }, 500)
+    
     fetch(`http://127.0.0.1:8000/query?query=${query}`)
         .then(response => response.json())
         .then(data => {
             console.log("Data:", data);
             // Remove typing indicator
+           // Remove typing indicator
+            clearInterval(typingInterval);
             responseDiv.removeChild(typingIndicator);
+
             showResponse(data.response)}) // Here you pass the response directly, which is a string
         .catch(error => console.error('An error occurred:', error));
 }
