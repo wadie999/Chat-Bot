@@ -12,7 +12,30 @@ input[type="text"] {
     text-align: center;
 }
 
-
+.queryBubble, .responseBubble {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px;
+    max-width: 80%;
+    font-size: 18px;
+    display: inline-block;
+  }
+  
+  .queryBubble {
+    background-color: #f0f0f0;
+    text-align: left;
+  }
+  
+  .responseBubble {
+    background-color: #e0e0ff;
+    text-align: left;
+  }
+  
+  .chatContainer {
+    text-align: left;
+  }
+  
+  
 body {
     font-family: Arial, sans-serif;
     padding: 20px;
