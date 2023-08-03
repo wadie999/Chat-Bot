@@ -7,12 +7,12 @@ from . import config
 ## ------------------Chunking the Document --------------###
 
 class TextTokenizer:
-    def __init__(self, encoding=config.ENCODING):
+    def __init__(self, encoding=config.EMBEDDING_TYPE):
         self.encoding = encoding
         self.tt_encoding = tiktoken.get_encoding(encoding)
     
     def read_file(self,fname):
-        with open(fname, 'r', self.encoding) as f:
+        with open(fname, 'r', encoding=config.ENCODING) as f:
             file_text = f.read()
         return file_text
     
