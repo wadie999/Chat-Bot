@@ -1,7 +1,12 @@
 
-# Chemin vers le document
+# Document-related parameters
 DOCUMENT_PATH = 'data/1_transcript.txt'
+ENCODING = 'utf-8'
+MAX_TOKENS = 500
 
-# Nom du modèle
+# Model-related parameters
 MODEL_NAME = "gpt-3.5-turbo"
+EMBEDDING_TYPE = 'cl100k_base' 
 
+# Search and retrieval-related parameters
+TOP_N_CHUNKS = 3
