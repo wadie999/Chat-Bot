@@ -9,7 +9,7 @@ It aims to provide efficient and relevant text retrieval for specific use cases.
 1. Clone the repository
 2. Install the required packages: `pip install -r requirements.txt`
 3. Place your text file in the desired location
-4. Create a keys.py file in src folder containing the line code : `key = "Your openai Key"`
+4. Set your OPENAI key by creatinga file `keys.py` and adding your key as a string variable  `key = " .."`
 
 ## Usage
 
