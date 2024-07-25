@@ -7,8 +7,8 @@ It aims to provide efficient and relevant text retrieval for specific use cases.
 ## Installation and Setup
 
 1. Clone the repository
-2. Install the required packages: `pip install -r requirements.txt`
-3. Place your text file in the desired location
+2. Install the required packages: `pip install -r requirements.txt`.
+3. Place your text file in the `data` folder.
 4. Set your OPENAI key by creating a `keys.py` file in `src` folder and adding your key as a string variable  `key = " .."`
 
 ## Usage
