@@ -1,6 +1,6 @@
 
 # Document-related parameters
-DOCUMENT_PATH = 'data/1_transcript.txt'
+DOCUMENT_PATH = 'data/exos.txt'
 ENCODING = "utf-8"
 MAX_TOKENS = 500
 
